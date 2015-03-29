@@ -3,8 +3,8 @@ Workaround for XCode base internationalization to support on-the-fly language ch
 
 ## Reasoning
 
-Base internationalization is awesome, but sometime not enough.
-Sometimes users want to change the language inside an application, rathen than changing on the whole device.
+Base internationalization is awesome, but sometimes not enough.
+Sometimes users want to change the language inside an application, rather than changing on the whole device.
 Currently there is no way to change the bundle language while the application is running.
 
 These set of classes are here to do just that!
