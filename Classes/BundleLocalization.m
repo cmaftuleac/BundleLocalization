@@ -23,6 +23,8 @@
 #import "BundleLocalization.h"
 #import "NSBundle+Localization.h"
 
+NSString *const kBundleLocalizationChangedNotification = @"kBundleLocalizationChangedNotification";
+
 
 @implementation BundleLocalization
 {
@@ -64,6 +66,13 @@
         }
         selectedLanguage = lang;
     }
+
+    // Set the language so system frameworks will be localized also.
+    // This requires an app restart to take effect.
+    [[NSUserDefaults standardUserDefaults] setObject:@[lang] forKey:@"AppleLanguages"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:kBundleLocalizationChangedNotification object:nil];
 }
 
 - (NSString*) language{
