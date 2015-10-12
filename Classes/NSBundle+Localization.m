@@ -55,9 +55,17 @@
 
 #pragma mark - Method Swizzling
 
--(NSString*) customLocaLizedStringForKey:(NSString *)key value:(NSString *)value table:(NSString *)tableName
+- (NSString *) customLocaLizedStringForKey:(NSString *)key value:(NSString *)value table:(NSString *)tableName
 {
-    NSBundle* bundle = [BundleLocalization sharedInstance].localizationBundle;
+    NSBundle *bundle = [BundleLocalization sharedInstance].localizationBundle;
+    NSString *bundleString = [self.bundleURL.path stringByReplacingOccurrencesOfString:@"/private" withString:@""];
+
+    // This is not the app bundle (i.e. a system framework such as UIKit, or MediaPlayer)
+    if ([bundle.bundleURL.path rangeOfString:bundleString].location == NSNotFound)
+    {
+        return [self customLocaLizedStringForKey:key value:value table:tableName];
+    }
+
     return [bundle customLocaLizedStringForKey:key value:value table:tableName];
 }
 

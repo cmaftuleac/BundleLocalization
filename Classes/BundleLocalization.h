@@ -23,6 +23,8 @@
 #import <Foundation/Foundation.h>
 #import "NSBundle+Localization.h"
 
+extern NSString *const kBundleLocalizationChangedNotification;
+
 @interface BundleLocalization : NSObject
 
 + (BundleLocalization*) sharedInstance;
